@@ -185,6 +185,11 @@ static void sugov_get_util(unsigned long *util, unsigned long *max, int cpu)
 static void sugov_set_iowait_boost(struct sugov_cpu *sg_cpu, u64 time,
 				   unsigned int flags)
 {
+	struct sugov_policy *sg_policy = sg_cpu->sg_policy;
+
+	if (!sg_policy->tunables->iowait_boost_enable)
+		return;
+
 	if (flags & SCHED_CPUFREQ_IOWAIT) {
 		sg_cpu->iowait_boost = sg_cpu->iowait_boost_max;
 	} else if (sg_cpu->iowait_boost) {
@@ -826,6 +831,8 @@ static int sugov_init(struct cpufreq_policy *policy)
 	lat = policy->cpuinfo.transition_latency / NSEC_PER_USEC;
 	if (lat)
 		tunables->rate_limit_us *= lat;
+
+	tunables->iowait_boost_enable = false;
 
 	tunables->iowait_boost_enable = false;
 
