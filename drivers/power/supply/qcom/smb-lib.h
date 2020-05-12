@@ -384,6 +384,7 @@ struct smb_charger {
 	bool			disable_stat_sw_override;
 	bool			in_chg_lock;
 	bool			fcc_stepper_enable;
+	bool			ufp_only_mode;
 
 	/* workaround flag */
 	u32			wa_flags;
@@ -654,12 +655,15 @@ int smblib_set_prop_pr_swap_in_progress(struct smb_charger *chg,
 int smblib_stat_sw_override_cfg(struct smb_charger *chg, bool override);
 void smblib_usb_typec_change(struct smb_charger *chg);
 int smblib_toggle_stat(struct smb_charger *chg, int reset);
+
 #ifdef VENDOR_EDIT
 /* tongfeng.huang@BSP.CHG.Basic, 2018/04/23,  Add for using gpio as CC  detect */
 const struct apsd_result *smblib_update_usb_type(struct smb_charger *chg);
 irqreturn_t oppo_ccdetect_change_handler(int irq, void *data);
 void check_otg_is_in(void);
 #endif
+
+int smblib_force_ufp(struct smb_charger *chg);
 
 int smblib_init(struct smb_charger *chg);
 int smblib_deinit(struct smb_charger *chg);
