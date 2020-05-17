@@ -667,6 +667,7 @@ static int _sde_connector_update_hbm(struct sde_connector *c_conn)
 			    dsi_display->panel->bl_config.bl_level) {
 				sde_encoder_poll_line_counts(drm_enc);
 				rc = dsi_panel_tx_cmd_set(dsi_display->panel, DSI_CMD_HBM_ON);
+                                set_oppo_display_scene(OPPO_DISPLAY_AOD_HBM_SCENE);
 			} else {
 				rc = dsi_panel_tx_cmd_set(dsi_display->panel, DSI_CMD_AOD_HBM_ON);
 			}
@@ -702,6 +703,7 @@ static int _sde_connector_update_hbm(struct sde_connector *c_conn)
 				rc = dsi_panel_tx_cmd_set(dsi_display->panel, DSI_CMD_HBM_OFF);
 			}
 
+			set_oppo_display_scene(OPPO_DISPLAY_NORMAL_SCENE);
 			mutex_unlock(&dsi_display->panel->panel_lock);
 			if (rc) {
 				pr_err("failed to send DSI_CMD_HBM_OFF cmds, rc=%d\n", rc);
