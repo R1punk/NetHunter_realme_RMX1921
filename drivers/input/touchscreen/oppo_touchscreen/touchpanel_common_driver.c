@@ -3927,7 +3927,6 @@ static int init_input_device(struct touchpanel_data *ts)
         set_bit(KEY_F4, ts->input_dev->keybit);
         set_bit(KEY_GESTURE_W, ts->input_dev->keybit);
         set_bit(KEY_GESTURE_M, ts->input_dev->keybit);
-        set_bit(KEY_GESTURE_S, ts->input_dev->keybit);
         set_bit(KEY_DOUBLE_TAP, ts->input_dev->keybit);
         set_bit(KEY_GESTURE_CIRCLE, ts->input_dev->keybit);
         set_bit(KEY_GESTURE_TWO_SWIPE, ts->input_dev->keybit);
